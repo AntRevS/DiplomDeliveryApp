@@ -1,0 +1,5 @@
+rootProject.name = 'api'
+
+include ':models'
+// put path to models projectDir because dont have nexus
+project(':models').projectDir = new File("models path")
