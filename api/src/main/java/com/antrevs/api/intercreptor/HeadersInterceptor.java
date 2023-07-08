@@ -25,7 +25,7 @@ public class HeadersInterceptor implements HandlerInterceptor {
             HttpServletResponse response,
             Object handler
     ) {
-        String sessionId = request.getHeader(HttpHeaders.SESSION_ID.getCode());
+        String sessionId = request.getHeader(HttpHeaders.SESSION_ID);
         if (sessionId == null || sessionRepository.findById(sessionId) == null) {
             response.setStatus(401);
             return false;
