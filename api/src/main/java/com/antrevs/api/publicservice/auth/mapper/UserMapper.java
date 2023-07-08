@@ -13,6 +13,7 @@ public class UserMapper implements BaseMapper<User, UserModel> {
         model.setRole(user.getRole());
         model.setName(user.getName());
         model.setPhoneNumber(user.getPhoneNumber());
+        model.setEmail(user.getEmail());
         return model;
     }
 }
