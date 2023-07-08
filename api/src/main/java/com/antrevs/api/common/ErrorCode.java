@@ -1,17 +1,10 @@
 package com.antrevs.api.common;
 
-public enum ErrorCode {
+public class ErrorCode {
 
-    USER_EXIST("user_exist"),
-    INCORRECT_PASSWORD("incorrect_password");
-
-    private String code;
-
-    ErrorCode(String code) {
-        this.code = code;
-    }
-
-    public String getCode() {
-        return code;
-    }
+    public static final String USER_EXIST = "user_exist";
+    public static final String INCORRECT_PASSWORD = "incorrect_password";
+    public static final String EMPTY_LIST = "empty_list";
+    public static final String NOT_EXIST = "not_exist";
+    public static final String INVALID_ARGUMENTS = "invalid_arguments";
 }

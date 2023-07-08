@@ -8,6 +8,7 @@ import com.antrevs.api.domain.repository.UserRepository;
 import com.antrevs.model.auth.AuthResponseModel;
 import com.antrevs.model.auth.RegisterResponseModel;
 import com.antrevs.model.error.ErrorModel;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -40,17 +41,17 @@ public class AuthController {
     public RegisterResponseModel register(@RequestBody AuthRequestBody body) {
         final RegisterResponseModel response = new RegisterResponseModel();
 
-        if (userRepository.findByPhoneNumber(body.phoneNumber) != null) {
+        if (userRepository.findByPhoneNumber(body.getPhoneNumber()) != null) {
             ErrorModel error = new ErrorModel();
-            error.setErrorCode(ErrorCode.USER_EXIST.getCode());
+            error.setErrorCode(ErrorCode.USER_EXIST);
             response.setError(error);
             return response;
         }
         User user = User
                 .builder()
                 .role(UserRole.CUSTOMER.getCode())
-                .phoneNumber(body.phoneNumber)
-                .password(encoder.encode(body.password))
+                .phoneNumber(body.getPhoneNumber())
+                .password(encoder.encode(body.getPassword()))
                 .build();
         userRepository.save(user);
 
@@ -62,11 +63,11 @@ public class AuthController {
     @ResponseBody
     public AuthResponseModel auth(@RequestBody AuthRequestBody body) {
         final AuthResponseModel response = new AuthResponseModel();
-        User user = userRepository.findByPhoneNumber(body.phoneNumber);
+        User user = userRepository.findByPhoneNumber(body.getPhoneNumber());
 
-        if (user == null || !encoder.matches(body.password, user.getPassword())) {
+        if (user == null || !encoder.matches(body.getPassword(), user.getPassword())) {
             ErrorModel error = new ErrorModel();
-            error.setErrorCode(ErrorCode.INCORRECT_PASSWORD.getCode());
+            error.setErrorCode(ErrorCode.INCORRECT_PASSWORD);
             response.setError(error);
             return response;
         }
@@ -79,30 +80,15 @@ public class AuthController {
         user.setSessionId(newSession.getId());
         userRepository.save(user);
         response.setUser(userMapper.map(user));
+        response.setSessionId(newSession.getId());
         return response;
     }
 
-
+    @Data
     private static class AuthRequestBody {
 
         private String phoneNumber;
 
         private String password;
-
-        public String getPhoneNumber() {
-            return phoneNumber;
-        }
-
-        public void setPhoneNumber(String phoneNumber) {
-            this.phoneNumber = phoneNumber;
-        }
-
-        public String getPassword() {
-            return password;
-        }
-
-        public void setPassword(String password) {
-            this.password = password;
-        }
     }
 }

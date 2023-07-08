@@ -28,6 +28,11 @@ public class Order {
     )
     private List<Product> products;
 
+    private Long dateMillis;
+
+    @OneToOne
+    private Address address;
+
     @OneToOne
     private User customer;
 

@@ -1,16 +1,6 @@
 package com.antrevs.api.common;
 
-public enum HttpHeaders {
+public class HttpHeaders {
 
-    SESSION_ID("session_id");
-
-    private String code;
-
-    public String getCode() {
-        return code;
-    }
-
-    HttpHeaders(String code) {
-        this.code = code;
-    }
+    public static final String SESSION_ID = "session_id";
 }

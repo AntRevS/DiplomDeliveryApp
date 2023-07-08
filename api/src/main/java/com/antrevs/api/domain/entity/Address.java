@@ -6,21 +6,28 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "products")
-public class Product {
+@Table(name = "address")
+public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    @OneToOne
+    private User customer;
 
-    private BigDecimal price;
+    private String city;
+
+    private String street;
+
+    private Long house;
+
+    private Long flat;
+
+    private String comment;
 }
