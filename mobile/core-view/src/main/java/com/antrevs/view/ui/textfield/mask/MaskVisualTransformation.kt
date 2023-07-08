@@ -8,7 +8,6 @@ import kotlin.math.absoluteValue
 
 internal class MaskVisualTransformation(
     private val mask: String,
-
 ) : VisualTransformation {
 
     private val specialSymbolsIndices = mask.indices.filter { mask[it] != '#' }
