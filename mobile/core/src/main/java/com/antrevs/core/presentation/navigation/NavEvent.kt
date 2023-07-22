@@ -8,6 +8,13 @@ sealed class NavEvent(
     open val args: NavArguments? = null,
 ) {
 
+    data class Authorization(
+        override val args: NavArguments.Authorization,
+    ) : NavEvent(
+        route = NavRoute.Authorization,
+        args = args,
+    )
+
     object Welcome : NavEvent(
         route = NavRoute.Welcome,
         clearBackStack = true,
@@ -19,6 +26,14 @@ sealed class NavEvent(
 
 object NavRoute {
 
+    const val Authorization = "authorization"
     const val Welcome = "welcome"
     const val Splash = "splash"
+}
+
+sealed interface NavArguments : Serializable {
+
+    data class Authorization(
+        val isAuthorization: Boolean,
+    ) : NavArguments
 }
