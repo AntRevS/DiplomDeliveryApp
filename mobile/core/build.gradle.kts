@@ -2,9 +2,11 @@ plugins {
     id ("com.android.library")
     id ("module-plugin")
     id ("di-plugin")
+    id ("network-plugin")
     id ("compose-plugin")
+    id ("data-plugin")
 }
 
 dependencies {
-    implementation("io.coil-kt:coil-compose:2.1.0")
+    implementation(project(":models"))
 }

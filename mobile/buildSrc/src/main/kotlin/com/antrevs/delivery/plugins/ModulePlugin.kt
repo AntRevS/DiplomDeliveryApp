@@ -10,6 +10,7 @@ import org.gradle.api.Project
 class ModulePlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
+        target.plugins.apply("org.jetbrains.kotlin.android")
         target.extensions.getByType(BaseExtension::class.java).run {
 
             setCompileSdkVersion(AppVersions.COMPILE_SDK)

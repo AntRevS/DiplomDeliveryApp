@@ -6,5 +6,6 @@ plugins {
 }
 
 dependencies {
-    implementation("io.coil-kt:coil-compose:2.1.0")
+    implementation(project(":core"))
+    implementation(project(":core-view"))
 }
