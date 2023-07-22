@@ -9,6 +9,8 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.antrevs.autorization.features.auth.presentation.AuthScreen
+import com.antrevs.autorization.features.welcome.presentation.WelcomeScreen
 import com.antrevs.core.LocalDialogHolder
 import com.antrevs.core.LocalNavController
 import com.antrevs.core.getApp
@@ -24,7 +26,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             DeliveryTheme {
                 val navController = rememberNavController()
-                val dialogHolder = getApp().uiComponent.getDialogHolder()
+                val dialogHolder = this.getApp().uiComponent.getDialogHolder()
                 CompositionLocalProvider(
                     LocalNavController provides navController,
                     LocalDialogHolder provides dialogHolder,
@@ -35,6 +37,12 @@ class MainActivity : ComponentActivity() {
                     ) {
                         composable(NavRoute.Splash) {
                             SplashScreen()
+                        }
+                        composable(NavRoute.Welcome) {
+                            WelcomeScreen()
+                        }
+                        composableWithArgs<NavArguments.Authorization>(NavRoute.Authorization) {
+                            AuthScreen(isAuth = it.isAuthorization)
                         }
                     }
                 }
