@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="welcome_auth_button_text">Войти</string>
+    <string name="welcome_register_button_text">Зарегистрироваться</string>
+    <string name="auth_title">Авторизация</string>
+    <string name="auth_login_hint">Введите номер телефона</string>
+    <string name="auth_password_hint">Введите пароль</string>
+    <string name="auth_button_text">Вход</string>
+    <string name="register_title">Регистрация</string>
+    <string name="register_button_text">Зарегистрироваться</string>
+    <string name="register_success">Регистрация успешна</string>
+</resources>

@@ -8,7 +8,10 @@ sealed class NavEvent(
     open val args: NavArguments? = null,
 ) {
 
-    object Splash : NavEvent(route = NavRoute.Splash)
+    object Welcome : NavEvent(
+        route = NavRoute.Welcome,
+        clearBackStack = true,
+    )
 
     object Back : NavEvent()
 
@@ -16,10 +19,6 @@ sealed class NavEvent(
 
 object NavRoute {
 
+    const val Welcome = "welcome"
     const val Splash = "splash"
 }
-
-sealed interface NavArguments : Serializable {
-    
-}
-
