@@ -4,7 +4,6 @@ plugins {
     id ("di-plugin")
     id ("network-plugin")
     id ("compose-plugin")
-    id ("org.jetbrains.kotlin.android")
 }
 
 android {
