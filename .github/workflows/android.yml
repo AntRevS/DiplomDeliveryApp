@@ -1,0 +1,14 @@
+name: Android CI
+
+on:
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: macos-latest
+
+    steps:
+    - name: Test
+      run: print "Hello"
