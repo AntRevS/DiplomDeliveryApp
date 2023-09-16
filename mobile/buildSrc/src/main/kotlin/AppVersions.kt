@@ -24,4 +24,6 @@ object AppVersions {
     const val RETROFIT = "2.9.0"
 
     const val ROOM = "2.5.0"
+
+    const val DETEKT = "1.23.1"
 }
