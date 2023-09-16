@@ -5,10 +5,10 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  code-analysys:
 
     runs-on: macos-latest
 
     steps:
-    - name: Test
-      run: print "Hello"
+    - name: detekt 
+      run: ./gradlew detekt
