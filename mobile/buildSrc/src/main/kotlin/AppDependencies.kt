@@ -24,4 +24,5 @@ object AppDependencies {
     const val ROOM_RUNTIME = "androidx.room:room-runtime:${AppVersions.ROOM}"
     const val ROOM_COMPILER = "androidx.room:room-compiler:${AppVersions.ROOM}"
 
+    const val DETEKT_FORMATTING = "io.gitlab.arturbosch.detekt:detekt-formatting:${AppVersions.DETEKT}"
 }
