@@ -101,7 +101,7 @@ class AuthScreenViewModel @Inject constructor(
             phoneNumber = phoneNumber,
             password = password,
         )
-        navigate(NavEvent.Main(NavArguments.Main(MainInitialScreenType.PRODUCTS)))
+        navigate(NavEvent.Main)
     }
 
     fun onBackClick() = navigate(NavEvent.Back)

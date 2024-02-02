@@ -10,6 +10,8 @@ public class ProductModel {
 
     private BigDecimal price;
 
+    private String imageUrl;
+
     public Long getId() {
         return id;
     }
@@ -28,6 +30,14 @@ public class ProductModel {
 
     public BigDecimal getPrice() {
         return price;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public void setPrice(BigDecimal price) {

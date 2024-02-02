@@ -15,6 +15,11 @@ sealed class NavEvent(
         args = args,
     )
 
+    object Main : NavEvent(
+        route = NavRoute.Main,
+        clearBackStack = true,
+    )
+
     object Welcome : NavEvent(
         route = NavRoute.Welcome,
         clearBackStack = true,
@@ -26,6 +31,7 @@ sealed class NavEvent(
 
 object NavRoute {
 
+    const val Main = "main"
     const val Authorization = "authorization"
     const val Welcome = "welcome"
     const val Splash = "splash"

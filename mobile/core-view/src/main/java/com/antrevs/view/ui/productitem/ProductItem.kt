@@ -1,11 +1,16 @@
 package com.antrevs.view.ui.productitem
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.key.Key.Companion.Minus
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -16,7 +21,6 @@ import com.antrevs.view.ui.button.badge.BadgeButton
 
 data class ProductItemState(
     val title: String,
-    val subtitle: String?,
     val imageUrl: String?,
     val badgeText: String,
     val productsCount: Int,
@@ -25,8 +29,8 @@ data class ProductItemState(
 @Composable
 fun ProductItem(
     state: ProductItemState,
-    onPlusClick: (Int) -> Unit,
-    onMinusClick: (Int) -> Unit,
+    onPlusClick: () -> Unit,
+    onMinusClick: () -> Unit,
     modifier: Modifier = Modifier,
     isVertical: Boolean = true,
 ) {
@@ -53,8 +57,8 @@ fun ProductItem(
 @Composable
 private fun HorizontalProductItem(
     state: ProductItemState,
-    onPlusClick: (Int) -> Unit,
-    onMinusClick: (Int) -> Unit,
+    onPlusClick: () -> Unit,
+    onMinusClick: () -> Unit,
     isProductsEmpty: Boolean,
     modifier: Modifier = Modifier,
 ) {
@@ -73,15 +77,13 @@ private fun HorizontalProductItem(
             Box(modifier = Modifier.weight(1F)) {
                 ProductItemText(
                     title = state.title,
-                    subtitle = state.subtitle,
                 )
             }
             ProductItemControl(
                 text = state.badgeText,
-                productsCount = state.productsCount,
                 onPlusClick = onPlusClick,
                 onMinusClick = onMinusClick,
-                isLeftIconVisible = !isProductsEmpty,
+                isControlsVisible = !isProductsEmpty,
             )
         }
         Spacer(Modifier.width(8.dp))
@@ -91,8 +93,8 @@ private fun HorizontalProductItem(
 @Composable
 private fun VerticalProductItem(
     state: ProductItemState,
-    onPlusClick: (Int) -> Unit,
-    onMinusClick: (Int) -> Unit,
+    onPlusClick: () -> Unit,
+    onMinusClick: () -> Unit,
     isProductsEmpty: Boolean,
     modifier: Modifier = Modifier,
 ) {
@@ -106,15 +108,13 @@ private fun VerticalProductItem(
         )
         ProductItemText(
             title = state.title,
-            subtitle = state.subtitle,
         )
         Spacer(Modifier.height(8.dp))
         ProductItemControl(
             text = state.badgeText,
-            productsCount = state.productsCount,
             onPlusClick = onPlusClick,
             onMinusClick = onMinusClick,
-            isLeftIconVisible = !isProductsEmpty,
+            isControlsVisible = !isProductsEmpty,
         )
     }
 }
@@ -122,45 +122,37 @@ private fun VerticalProductItem(
 @Composable
 private fun ProductItemText(
     title: String,
-    subtitle: String?,
 ) {
-    Column {
-        Text(
-            text = title,
-            maxLines = 2,
-            overflow = TextOverflow.Ellipsis,
-            style = DeliveryTheme.typography.body0,
-            color = DeliveryTheme.colors.primary,
-        )
-        subtitle?.let {
-            Text(
-                text = it,
-                style = DeliveryTheme.typography.body0,
-                color = DeliveryTheme.colors.secondary,
-            )
-        }
-    }
+    Text(
+        text = title,
+        maxLines = 2,
+        overflow = TextOverflow.Ellipsis,
+        style = DeliveryTheme.typography.body0,
+        color = DeliveryTheme.colors.primary,
+    )
 }
 
 @Composable
 private fun ProductItemControl(
     text: String,
-    productsCount: Int,
-    onPlusClick: (Int) -> Unit,
-    onMinusClick: (Int) -> Unit,
-    isLeftIconVisible: Boolean,
+    onPlusClick: () -> Unit,
+    onMinusClick: () -> Unit,
+    isControlsVisible: Boolean,
 ) {
     BadgeButton(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(32.dp),
         text = text,
         contentColor = DeliveryTheme.colors.brand,
-        onRightIconClick = {
-            onPlusClick(productsCount + 1)
+        onRightIconClick = onPlusClick,
+        onLeftIconClick = onMinusClick,
+        rightIcon = if (isControlsVisible) {
+            { Plus }
+        } else {
+            null
         },
-        onLeftIconClick = {
-            onMinusClick(productsCount - 1)
-        },
-        rightIcon = { Plus },
-        leftIcon = if (isLeftIconVisible) {
+        leftIcon = if (isControlsVisible) {
             { Minus }
         } else {
             null
@@ -175,7 +167,6 @@ private fun ProductItemPreview() {
         ProductItem(
             state = ProductItemState(
                 title = "Кола",
-                subtitle = "900 мл",
                 imageUrl = "",
                 badgeText = "100 $",
                 productsCount = 0,

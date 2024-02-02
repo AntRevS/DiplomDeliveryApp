@@ -12,6 +12,7 @@ public class ProductMapper implements BaseMapper<Product, ProductModel> {
         model.setId(product.getId());
         model.setName(product.getName());
         model.setPrice(product.getPrice());
+        model.setImageUrl(product.getImageUrl());
         return model;
     }
 }

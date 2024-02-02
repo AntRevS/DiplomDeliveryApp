@@ -46,7 +46,7 @@ public class ProductsController {
     @GetMapping("/test")
     @ResponseBody
     public void test() {
-        Product product1 = Product.builder().name("Burger").price(BigDecimal.ONE).build();
+        Product product1 = Product.builder().name("Burger").price(BigDecimal.ONE).imageUrl("https://cdn.bahroma1.ru/goods/grandburger_6366d239d48cc.jpg").build();
         Product product2 = Product.builder().name("Milk shake").price(BigDecimal.ONE).build();
 
         List<Product> products1 = new ArrayList<>();

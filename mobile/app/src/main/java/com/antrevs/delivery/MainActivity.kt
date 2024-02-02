@@ -16,6 +16,7 @@ import com.antrevs.core.LocalNavController
 import com.antrevs.core.getApp
 import com.antrevs.core.presentation.navigation.NavArguments
 import com.antrevs.core.presentation.navigation.NavRoute
+import com.antrevs.main.features.products.presentation.ProductsScreen
 import com.antrevs.splash.presentation.SplashScreen
 import com.antrevs.view.theme.DeliveryTheme
 import java.io.Serializable
@@ -35,6 +36,9 @@ class MainActivity : ComponentActivity() {
                         navController = navController,
                         startDestination = NavRoute.Splash,
                     ) {
+                        composable(NavRoute.Main) {
+                            ProductsScreen()
+                        }
                         composable(NavRoute.Splash) {
                             SplashScreen()
                         }
